@@ -22,7 +22,7 @@ Open `index.html` in a browser, or `python3 -m http.server 8080` and visit http:
 
 | What                      | Where                                                        |
 |---------------------------|--------------------------------------------------------------|
-| Phone / WhatsApp number   | `index.html` (search `0333 123 4567`, `923331234567`) and `WHATSAPP` in `assets/js/main.js` |
+| Phone / WhatsApp number   | `index.html` (search `0310 521 4309`, `923105214309`) and `WHATSAPP` in `assets/js/main.js` |
 | Typing words in hero      | `words` array in `assets/js/main.js`                         |
 | Colours                   | `:root` variables at the top of `assets/css/style.css`       |
 | Photos                    | `<img src>` in `index.html`                                  |
