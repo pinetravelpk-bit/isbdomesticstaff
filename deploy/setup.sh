@@ -48,6 +48,7 @@ if ! git ls-remote "$CLONE_URL" >/dev/null 2>&1; then
 fi
 
 echo "==> Fetching site"
+git config --global --get-all safe.directory | grep -qx "$WEBROOT" || git config --global --add safe.directory "$WEBROOT"
 if [ -d "$WEBROOT/.git" ]; then
   git -C "$WEBROOT" pull --ff-only
 else
