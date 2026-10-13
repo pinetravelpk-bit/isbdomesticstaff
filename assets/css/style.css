@@ -381,6 +381,10 @@ button { font: inherit; cursor: pointer; }
 .footer__addr .ic { color: var(--blue); }
 .footer__addr:hover { color: var(--blue); }
 .powered { color: var(--navy-2); font-weight: 700; white-space: nowrap; }
+.footer__credit { text-align: center; font-size: .78rem; color: var(--muted); border-top: 1px solid var(--line); padding: 12px 0 18px; margin-top: -6px; }
+.footer__credit a { color: var(--orange); font-weight: 700; white-space: nowrap; position: relative; }
+.footer__credit a::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+.footer__credit a:hover::after { transform: scaleX(1); }
 .cta__addr strong { font-size: 1.05rem; }
 .footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; border-top: 1px solid var(--line); padding: 16px 0 22px; font-size: .8rem; color: var(--muted); }
 .footer__bottom a:hover { color: var(--blue); }
