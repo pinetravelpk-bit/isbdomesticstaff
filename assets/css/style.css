@@ -101,7 +101,7 @@ button { font: inherit; cursor: pointer; }
 }
 .preloader.is-done { opacity: 0; visibility: hidden; }
 .preloader__house { position: relative; width: 90px; height: 90px; display: grid; place-items: center; }
-.preloader__house img { width: 54px; animation: bob 1.2s ease-in-out infinite; }
+.preloader__house img { width: 60px; border-radius: 50%; animation: bob 1.2s ease-in-out infinite; }
 .preloader__ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--sky); border-top-color: var(--orange); animation: spin 1s linear infinite; }
 .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 1001; background: linear-gradient(90deg, var(--blue), var(--teal), var(--orange)); }
 
@@ -115,10 +115,10 @@ button { font: inherit; cursor: pointer; }
 .header.is-scrolled { box-shadow: 0 8px 30px rgba(15,45,91,.08); padding: 8px 0; }
 .header__inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .brand { display: flex; align-items: center; gap: 10px; }
-.brand__mark { width: 48px; height: 48px; transition: transform .4s; }
-.brand:hover .brand__mark { transform: rotate(-8deg) scale(1.06); }
-.brand__text strong { white-space: nowrap; display: block; font-size: 1.25rem; color: var(--navy-2); font-weight: 800; letter-spacing: -.01em; }
-.brand__text small { white-space: nowrap; display: block; font-size: .74rem; color: var(--muted); margin-top: -2px; }
+.brand__logo { height: 60px; width: auto; transition: height .3s, transform .4s; }
+.brand:hover .brand__logo { transform: scale(1.03); }
+.header.is-scrolled .brand__logo { height: 50px; }
+.footer .brand__logo { height: 70px; }
 
 .nav { display: flex; align-items: center; gap: 24px; }
 .nav__link { white-space: nowrap; font-weight: 500; font-size: .92rem; color: var(--ink); position: relative; padding: 6px 0; }
@@ -452,9 +452,7 @@ img.is-fallback { object-fit: cover; }
   .footer__tag { text-align: center; align-items: center; }
 }
 @media (max-width: 640px) {
-  .brand__text strong { font-size: 1.05rem; }
-  .brand__text small { font-size: .68rem; }
-  .brand__mark { width: 40px; height: 40px; }
+  .brand__logo, .header.is-scrolled .brand__logo { height: 44px; }
   .hero { padding-top: 30px; }
   .hero__btns .btn { width: 100%; }
   .hero__feats { gap: 16px; display: grid; grid-template-columns: 1fr 1fr; }
