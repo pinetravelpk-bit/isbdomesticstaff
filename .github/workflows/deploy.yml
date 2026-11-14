@@ -1,0 +1,41 @@
+# Deploys the site to the VPS on every push to main (or on demand from the Actions tab).
+# Needs repository secrets: VPS_HOST, VPS_USER, VPS_PASSWORD.
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy site files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          source: "index.html,assets,deploy"
+          target: /var/www/isbdomesticstaff
+          overwrite: true
+
+      - name: Fix permissions and reload nginx
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            set -e
+            chown -R www-data:www-data /var/www/isbdomesticstaff
+            nginx -t && systemctl reload nginx
+            grep -o '0310 521 4309' /var/www/isbdomesticstaff/index.html | head -1
+            echo "Deployed ${{ github.sha }}"
