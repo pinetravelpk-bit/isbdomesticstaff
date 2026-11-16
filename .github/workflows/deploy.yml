@@ -14,20 +14,29 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      HAS_SECRETS: ${{ secrets.VPS_PASSWORD != '' }}
     steps:
+      - name: Skip when server secrets are not set
+        if: env.HAS_SECRETS != 'true'
+        run: echo "VPS secrets not configured; the server pulls updates itself via cron. Skipping."
+
       - uses: actions/checkout@v4
+        if: env.HAS_SECRETS == 'true'
 
       - name: Copy site files to server
+        if: env.HAS_SECRETS == 'true'
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
-          source: "index.html,assets,deploy"
+          source: "index.html,assets,blog,sitemap.xml,robots.txt"
           target: /var/www/isbdomesticstaff
           overwrite: true
 
       - name: Fix permissions and reload nginx
+        if: env.HAS_SECRETS == 'true'
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}

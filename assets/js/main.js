@@ -74,7 +74,7 @@
 
   /* ---------- Active nav link on scroll ---------- */
   var links = $$(".nav__link");
-  var sections = links.map(function (l) { return $(l.getAttribute("href")); }).filter(Boolean);
+  var sections = links.map(function (l) { var h = l.getAttribute("href"); return h.charAt(0) === "#" ? $(h) : null; }).filter(Boolean);
   if ("IntersectionObserver" in window) {
     var navObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {

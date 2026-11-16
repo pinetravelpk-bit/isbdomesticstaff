@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /content/
+Disallow: /scripts/
+Disallow: /deploy/
+
+Sitemap: https://isbdomesticstaff.pk/sitemap.xml
