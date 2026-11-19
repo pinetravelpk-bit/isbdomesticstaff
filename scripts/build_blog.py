@@ -27,6 +27,7 @@ PHONE = "0310 521 4309"
 PHONE_TEL = "+923105214309"
 WA = "923105214309"
 ASSET_V = "7"
+MIN_WORDS = 1800
 
 U = "https://images.unsplash.com/"
 COVERS = {
@@ -369,6 +370,11 @@ def publish(slug, description):
     t = next(t for t in topics if t["slug"] == slug)
     if not (ROOT / "content/blog" / f"{slug}.html").exists():
         raise SystemExit(f"content/blog/{slug}.html is missing")
+    n = words((ROOT / "content/blog" / f"{slug}.html").read_text(encoding="utf-8"))
+    if n < MIN_WORDS:
+        raise SystemExit(f"{slug}: {n} words, below the {MIN_WORDS}-word minimum; not published")
+    if not 120 <= len(description) <= 165:
+        raise SystemExit(f"meta description is {len(description)} characters; aim for 140-160")
     t["status"] = "published"
     t["published"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     t["description"] = description
